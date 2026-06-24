@@ -61,6 +61,30 @@ def detect_cpu() -> dict:
                 elif line.startswith("NumberOfCores="):
                     val = line.split("=", 1)[1].strip()
                     info["cores_physical"] = int(val) if val.isdigit() else None
+        else:
+            # WMIC is removed by default on recent Windows builds.  CIM is its
+            # supported PowerShell replacement and keeps this probe useful on
+            # stock Windows 11 installations.
+            rc, out = run(
+                [
+                    "powershell",
+                    "-NoProfile",
+                    "-Command",
+                    "(Get-CimInstance Win32_Processor | Select-Object -First 1 -ExpandProperty Name)",
+                ]
+            )
+            if rc == 0 and out.strip():
+                info["model"] = out.strip()
+            rc, out = run(
+                [
+                    "powershell",
+                    "-NoProfile",
+                    "-Command",
+                    "(Get-CimInstance Win32_Processor | Select-Object -First 1 -ExpandProperty NumberOfCores)",
+                ]
+            )
+            if rc == 0 and out.strip().isdigit():
+                info["cores_physical"] = int(out.strip())
     info.setdefault("model", "unknown")
     info.setdefault("cores_physical", info["cores_logical"])
     return info
@@ -86,6 +110,16 @@ def detect_ram_gb() -> float:
                 val = line.split("=", 1)[1].strip()
                 if val.isdigit():
                     return round(int(val) / 1024**3, 1)
+        rc, out = run(
+            [
+                "powershell",
+                "-NoProfile",
+                "-Command",
+                "(Get-CimInstance Win32_ComputerSystem).TotalPhysicalMemory",
+            ]
+        )
+        if rc == 0 and out.strip().isdigit():
+            return round(int(out.strip()) / 1024**3, 1)
     return 0.0
 
 
