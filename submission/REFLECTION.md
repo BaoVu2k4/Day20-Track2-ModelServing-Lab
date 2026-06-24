@@ -1,6 +1,7 @@
 # Reflection — Lab 20 (Personal Report)
 
-**Họ tên:** BaoVu2k4 (xác nhận lại trước khi submit)  
+**Họ tên:** Vũ Quang Bảo
+**Mã học viên :** 2A202600610
 **Cohort:** Chưa cung cấp — điền trước khi submit  
 **Ngày submit:** 2026-06-24
 
