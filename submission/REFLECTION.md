@@ -80,6 +80,6 @@ Tôi cũng chạy C8 semantic-cache offline. Với threshold 0.80, cache hit 3/8
 - [x] `benchmarks/01-quickstart-results.md` đã tạo từ benchmark thật.
 - [x] `benchmarks/02-server-results.md` đã tổng hợp hai lượt Locust.
 - [x] `benchmarks/bonus-semantic-cache.md` đã ghi threshold sweep.
-- [ ] Chụp và lưu tối thiểu 6 screenshots vào `submission/screenshots/`.
-- [ ] Chạy `make verify` lại sau khi có screenshots.
-- [ ] Đặt repo GitHub ở chế độ public rồi nộp URL lên LMS.
+- [x] Chụp và lưu tối thiểu 6 screenshots vào `submission/screenshots/`.
+- [x] Chạy `make verify` lại sau khi có screenshots.
+- [x] Đặt repo GitHub ở chế độ public rồi nộp URL lên LMS.
